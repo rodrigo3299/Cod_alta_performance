@@ -1,42 +1,73 @@
 import java.util.Scanner;
 
-public class ex1 {
+public class ex2 {
+    static final int N = 30;
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int rm[] = new int[30];
-        double nota1[] = new double[30];
-        double nota2[] = new double[30];
-        int n=0;
 
-        System.out.print("Informe RM(negativo para encerrar): ");
-        int rmLido = sc.nextInt();
+        int rm[] = new int[N];
+        double nota1[] = new double[N];
+        double nota2[] = new double[N];
 
-        while(n<30 && rmLido>0){
-            rm[n] = rmLido;
-            System.out.print("Nota1:");
-            nota1[n] = sc.nextDouble();
-            System.out.print("Nota2:");
-            nota2[n] = sc.nextDouble();
-            n++;
-            System.out.print("Informe RM(negativo para encerrar): ");
-            rmLido = sc.nextInt();
-        }
-        double media[] = new double[30];
+        int n = entradaDados(rm, nota1, nota2);
+
+        double media[] = new double[n];
+        calculaMedia(n, nota1, nota2, media);
+
         for (int i = 0; i < n; i++) {
-            media[i] = (nota1[i]+nota2[i])/2;
-            System.out.println("RM: "+rm[i]+"\t media:  " +media[i]);
+            System.out.println("RM: " + rm[i] + "\t media: " + media[i]);
         }
+
         int aprovados[] = new int[n];
-        int nAp =0;
+        int nAp = geraListaAprovados(n, media, rm, aprovados);
+
+        System.out.println("\nLista de Aprovados:");
+        for (int i = 0; i < nAp; i++) {
+            System.out.println(aprovados[i]);
+        }
+    }
+
+    public static int geraListaAprovados(int n, double[] media, int[] rm, int[] aprovados) {
+        int nAp = 0;
+
         for (int i = 0; i < n; i++) {
-            if (media[i] >= 6){
+            if (media[i] >= 6) {
                 aprovados[nAp] = rm[i];
                 nAp++;
             }
         }
-        System.out.println("\n Lista de Aprovados : ");
-        for (int i = 0; i < nAp; i++) {
-            System.out.println(aprovados[i]);
+
+        return nAp;
+    }
+
+    private static void calculaMedia(int n, double[] nota1, double[] nota2, double[] media) {
+        for (int i = 0; i < n; i++) {
+            media[i] = (nota1[i] + nota2[i]) / 2;
         }
+    }
+
+    public static int entradaDados(int[] rm, double[] nota1, double[] nota2) {
+        Scanner sc = new Scanner(System.in);
+        int n = 0;
+
+        System.out.print("Informe RM (negativo para encerrar): ");
+        int rmLido = sc.nextInt();
+
+        while (n < N && rmLido > 0) {
+            rm[n] = rmLido;
+
+            System.out.print("Nota1: ");
+            nota1[n] = sc.nextDouble();
+
+            System.out.print("Nota2: ");
+            nota2[n] = sc.nextDouble();
+
+            n++;
+
+            System.out.print("Informe RM (negativo para encerrar): ");
+            rmLido = sc.nextInt();
+        }
+
+        return n;
     }
 }
