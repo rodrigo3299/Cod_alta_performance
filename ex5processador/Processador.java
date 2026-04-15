@@ -27,6 +27,7 @@ public class Processador {
                     } else{
                         pid = fila.dequeue();
                         System.out.println("Process: " +pid+ " será executado agora");
+                        System.out.println("...Execução");
                     }
                     break;
                 case 3:
