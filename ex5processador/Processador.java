@@ -28,6 +28,13 @@ public class Processador {
                         pid = fila.dequeue();
                         System.out.println("Process: " +pid+ " será executado agora");
                         System.out.println("...Execução");
+                        System.out.println("Processo foi concluido? (1-sim)");
+                        int resp = le.nextInt();
+                        if(resp==1){
+                            System.out.println("O processo " +pid+ "foi concluido");
+                        } else{
+                            fila.enqueue(pid);
+                        }
                     }
                     break;
                 case 3:
