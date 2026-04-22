@@ -31,7 +31,7 @@ public class Processador {
                         System.out.println("Processo foi concluido? (1-sim)");
                         int resp = le.nextInt();
                         if(resp==1){
-                            System.out.println("O processo " +pid+ "foi concluido");
+                            System.out.println("O processo " +pid+ " foi concluido");
                         } else{
                             fila.enqueue(pid);
                         }
@@ -39,13 +39,23 @@ public class Processador {
                     break;
                 case 3:
                     if(!fila.isEmpty()){
-                        System.out.println("Há alunos aguardando na fila");
-                        opcao = 0;
+                        System.out.println("Há processor aguardando na fila");
+                        System.out.println("Deseja encerrar todos? (1-sim): ");
+                        int resp = le.nextInt();
+                        if(resp==1){
+                            while (!fila.isEmpty()){
+                                System.out.printf("Processo " + fila.dequeue()+ " foi encerrado");
+                            }
+                        }
+                        else{
+                            opcao = 0;
+                        }
                     }
                     break;
                 default:
                     System.out.println("Opção inválida");
             }
         } while (opcao!=3);
+
     }
 }
